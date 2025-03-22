@@ -8,12 +8,16 @@ class Category:
     products_count = 0
     category_count = 0
 
-    def __init__(self, name, description, products_list):
+    def __init__(self, name, description, products):
         self.name = name
         self.description = description
-        self.products_list = products_list
+        self.products = products
         Category.category_count += 1
-        Category.products_count += len(products_list)
+        Category.products_count += len(products)
+
+    # def category_counters(self):
+    #     cat_count = Category.category_count
+    #     prods_count = Category.products_count
 
 
 if __name__ == '__main__':
@@ -27,6 +31,6 @@ if __name__ == '__main__':
 
     print(category.name)
     print(category.description)
-    print(category.products_list)
+    print(category.products)
     print(category.products_count)
     print(category.category_count)
