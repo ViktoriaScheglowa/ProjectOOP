@@ -4,16 +4,33 @@ from src.product import Product
 class Category:
     name: str
     description: str
-    products_list: list
+    products: list
     products_count = 0
     category_count = 0
 
     def __init__(self, name, description, products):
         self.name = name
         self.description = description
-        self.products = products
+        self.__products = products
         Category.category_count += 1
         Category.products_count += len(products)
+
+    @property
+    def add_product(self):
+        new_product = ""
+        for product in self.__products:
+            new_product += f"{name}, {description}, {price}, {quantity}\n"
+            return new_product
+
+    @products.setter
+    def products(self, product: Product):
+        self.__products.append(product)
+        Category.products_count += 1
+
+    @property
+    def products_in_list(self):
+        return self.__products
+
 
     # def category_counters(self):
     #     cat_count = Category.category_count
