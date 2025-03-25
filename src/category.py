@@ -15,12 +15,19 @@ class Category:
         Category.category_count += 1
         Category.products_count += len(products)
 
-    @property
-    def add_product(self):
+    def add_product(self, product: Product):
+        self.__products.append(product)
+        Category.products_count += 1
+
+    def product_new(self):
         new_product = ""
         for product in self.__products:
-            new_product += f"{name}, {description}, {price}, {quantity}\n"
+            new_product += f"{product.name}, {product.description}, {product.price} руб. Остаток: {product.quantity}шт.\n"
             return new_product
+
+    @property
+    def products(self):
+        return self.__products
 
     @products.setter
     def products(self, product: Product):
@@ -30,11 +37,6 @@ class Category:
     @property
     def products_in_list(self):
         return self.__products
-
-
-    # def category_counters(self):
-    #     cat_count = Category.category_count
-    #     prods_count = Category.products_count
 
 
 if __name__ == '__main__':
@@ -48,6 +50,10 @@ if __name__ == '__main__':
 
     print(category.name)
     print(category.description)
-    print(category.products)
+
     print(category.products_count)
     print(category.category_count)
+
+    product4 = Product("POCO", "256GB, Белый цвет, 50MP камера", 60000.0, 3)
+    category.products = product4
+    print(category.products)
