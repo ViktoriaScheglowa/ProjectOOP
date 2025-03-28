@@ -1,3 +1,5 @@
+import pytest
+
 def test_category_init(first_category, second_category):
     assert first_category.name == "Смартфоны"
     assert first_category.description == "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни"
@@ -11,10 +13,24 @@ def test_category_init(first_category, second_category):
 
 
 def test_category_products_property(first_category):
-    assert first_category.products == "[Product(name=Samsung Galaxy C23 Ultra, description=256GB, Серый цвет, 200MP камера, price=180000.0, quantity=5), Product(name=Iphone 15, description=512GB, Gray space, price=210000.0, quantity=8), Product(name=Xiaomi Redmi Note 11, description=1024GB, Синий, price=31000.0, quantity=14), Product(name=POCO, description=256GB, Белый цвет, 50MP камера, price=60000.0, quantity=3)]"
+    assert first_category.products == "[Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток 5 шт., Iphone 15, 210000.0 руб. Остаток 8 шт., Xiaomi Redmi Note 11, 31000.0 руб. Остаток 14 шт.]"
 
 
 def test_category_products_setter(first_category, product):
     assert len(first_category.products_in_list) == 3
     first_category.products = product
     assert len(first_category.products_in_list) == 4
+
+def test_category_str(first_category):
+    assert str(first_category) == "Смартфоны, количество продуктов: 14 шт."
+
+def test_product_iterator(product_iterator):
+    iter(product_iterator)
+    assert product_iterator.index == 0
+    assert next(product_iterator).name == "Samsung Galaxy C23 Ultra"
+    assert next(product_iterator).name == "Iphone 15"
+    assert next(product_iterator).name == "Xiaomi Redmi Note 11"
+    assert next(product_iterator).name == "POCO"
+
+with pytest.raises(StopIteration):
+    next(product_iterator)

@@ -10,5 +10,11 @@ def test_price_property(product):
 
 
 def test_price_setter(product):
-    if price <= 0:
-        assert price == "Цена не должна быть нулевая или отрицательная"
+    if product.price <= 0:
+        assert product.price == "Цена не должна быть нулевая или отрицательная"
+
+def test_product_str(product):
+    assert str(product) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток 5 шт."
+
+def test_product_add(product1, product2):
+    assert product1 + product2 == 2580000.0

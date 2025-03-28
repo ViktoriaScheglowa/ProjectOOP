@@ -2,7 +2,11 @@ import pytest
 
 from src.category import Category
 from src.product import Product
+from src.product_iterator import ProductIterator
 
+@pytest.fixture
+def product_iterator(second_category):
+    return ProductIterator(second_category)
 
 @pytest.fixture
 def first_category():
@@ -23,3 +27,11 @@ def second_category():
 @pytest.fixture
 def product():
     return Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+
+@pytest.fixture
+def product1():
+    return Product(product(price) * product(quantity))
+
+@pytest.fixture
+def product2():
+    return Product(product(price) * product(quantity))
