@@ -14,7 +14,7 @@ class Product:
         return f"{self.name}, {self.price} руб. Остаток {self.quantity} шт."
 
     def __add__(self, other):
-        return (self.__price * self.quantity + other.__price * other.quantity)
+        return self.price * self.quantity + other.price * other.quantity
 
     def __repr__(self):
         return self.__str__()
