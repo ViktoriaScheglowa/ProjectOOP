@@ -51,6 +51,7 @@ if __name__ == '__main__':
     print(product2.quantity)
 
     product2.price = 0
+    # pragma: no cover
     print(product2.price)
 
     product2.price = 70000
