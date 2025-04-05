@@ -41,6 +41,15 @@ class Category:
     def products_in_list(self):
         return self.__products
 
+    @products.setter
+    def products_list(self, product: Product):
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.products_count += 1
+        else:
+            raise TypeError
+
+
 
 if __name__ == '__main__':
     product1 = Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
