@@ -19,8 +19,11 @@ class Category:
         return f'{self.name}, количество продуктов: {Category.products_count} шт.'
 
     def add_product(self, product: Product):
-        self.__products.append(product)
-        Category.products_count += 1
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.products_count += 1
+        else:
+            raise TypeError
 
     def product_new(self):
         new_product = ""
@@ -40,15 +43,6 @@ class Category:
     @property
     def products_in_list(self):
         return self.__products
-
-    @products.setter
-    def products_list(self, product: Product):
-        if isinstance(product, Product):
-            self.__products.append(product)
-            Category.products_count += 1
-        else:
-            raise TypeError
-
 
 
 if __name__ == '__main__':
