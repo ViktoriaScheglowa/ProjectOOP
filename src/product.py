@@ -22,9 +22,6 @@ class Product(BaseProduct, PrintMixin):
             return self.price * self.quantity + other.price * other.quantity
         raise TypeError
 
-    def __repr__(self):
-        return self.__str__()
-
     @classmethod
     def new_product(cls, name, description, price, quantity):
         return cls(name, description, price, quantity)
