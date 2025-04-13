@@ -1,4 +1,5 @@
 import pytest
+from src.product import Product
 
 
 def test_category_init(first_category, second_category):
@@ -35,3 +36,24 @@ def test_product_iterator(product_iterator):
     with pytest.raises(StopIteration):
         next(product_iterator)
     assert product_iterator.index == 1
+
+
+def test_middle_price(first_category, category_without_product):
+    assert first_category.middle_price() == 140333.33333333334
+    assert category_without_product.middle_price() == 0
+
+
+def test_custom_exception(capsys, first_category):
+    assert len(first_category.products) == 3
+
+    product_add = Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0)
+    first_category.products = product_add
+    message = capsys.readouterr()
+    assert message.out.stip().split('\n')[-2] == "Нельзя добавить товар с нулевым количеством"
+    assert message.out.stip().split('\n')[-1] == "Обработка добавления завершена"
+
+    product_add = Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    first_category.products = product_add
+    message = capsys.readouterr()
+    assert message.out.stip().split('\n')[-2] == "Товар добавлен успешно"
+    assert message.out.stip().split('\n')[-1] == "Обработка добавления завершена"
